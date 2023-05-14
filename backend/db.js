@@ -6,6 +6,7 @@ const connection = mysql.createConnection({
     password: "xyz",
     database: "demoproject",
   });
+  
 connection.connect((err) => {
     if (err) {
       console.log("Database Connection Failed !!!", err);

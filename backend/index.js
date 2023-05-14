@@ -2,14 +2,14 @@ const express = require( "express");
 
 const connection = require("./db.js")
 const app=express();
+ app.use('/api/auth', require("./routes/auth.js"))
 
-
-app.use(express.json())
+app.use(express.json())//used for getting JSON Object
 
 app.get('/',(req,res)=>{
     res.json("Hello Atul")
 })
-
+/*
 app.get('/data',(req,res)=>{
     const q= "select * from login "
     connection.query(q,(err,data)=>{
@@ -19,7 +19,7 @@ app.get('/data',(req,res)=>{
     })
 
 })
-/*
+
 app.post('/add',(req,res)=>{
     const q= "insert into demoproject.login values(?)"
     const value=[req.body.email,req.body.password,req.body.sec,req.body.ans,req.body.role]
