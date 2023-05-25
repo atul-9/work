@@ -2,9 +2,9 @@ const express = require( "express");
 
 const connection = require("./db.js")
 const app=express();
- app.use('/api/auth', require("./routes/auth.js"))
-
 app.use(express.json())//used for getting JSON Object
+app.use('/api/auth', require("./routes/auth.js"))
+
 
 app.get('/',(req,res)=>{
     res.json("Hello Atul")
