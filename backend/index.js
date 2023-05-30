@@ -2,9 +2,23 @@ const express = require( "express");
 
 const connection = require("./db.js")
 const app=express();
+
+const cors = require('cors');
+app.use(cors());
 app.use(express.json())//used for getting JSON Object
 app.use('/api/auth', require("./routes/auth.js"))
-
+app.use('/api/addstudent', require("./routes/addstudents.js"))
+app.use('/api/addteacher', require("./routes/addteachers.js"))
+app.use('/api/getstudent', require("./routes/getstudent.js"))
+app.use('/api/getteacher', require("./routes/getteacher.js"))
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    next();
+  })
+//
+  
 
 app.get('/',(req,res)=>{
     res.json("Hello Atul")
