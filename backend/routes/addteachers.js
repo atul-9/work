@@ -15,7 +15,12 @@ router.post('/', async (req, res) => {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPass = await bcrypt.hash(pass, salt);
-
+    const q = "select * from login where email=?";
+  connection.query(q, [email], (err, data) => {
+    if (err) {
+      return res.json({ msg: "User already exists" });
+    }
+    if (!data.length){
     const q1 = "INSERT INTO teacher VALUES (?, ?, ?, ?, ?, ?)";
     const q2 = "INSERT INTO login(email, password, role) VALUES (?, ?, 'Teacher')";
 
@@ -36,6 +41,11 @@ router.post('/', async (req, res) => {
         });
        
     });
+  }
+  else{
+    return res.json({ msg: "User already exists" })
+  }
+  });
   
 
 });

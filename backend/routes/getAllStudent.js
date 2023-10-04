@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../db");
-const fetchid= require("../middleware/getId")
 
-
-router.post('/',fetchid, async (req, res) => {
-    const prn=req.userid;
-    
-    const q1='select * from student where prn=?;';
-    connection.query(q1, [prn], (err, data) => {
+router.get('/', async (req, res) => {
+    const q1='select * from student where status=1 ;';
+    connection.query(q1, (err, data) => {
         if (err) {
             console.log(err.message)
           return res.json(err);

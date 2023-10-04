@@ -2,7 +2,9 @@ const jwt = require("jsonwebtoken");
 const secretKey = require("../config/config");
 
 const fetchuser = (req, res, next) => {
-  const token = req.header('auth-token');
+  console.log(req.header.data
+    )
+  const token = req.header('Auth-token');
   console.log(token);
 
   if (!token) {
@@ -15,6 +17,7 @@ const fetchuser = (req, res, next) => {
   try {
     const data = jwt.verify(token, key);
     req.userid = data;
+    console.log(data);
     next();
   } catch (error) {
     console.log(error.message);

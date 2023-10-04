@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,6 +34,7 @@ const Login = () => {
       setValues({ ...values, msg: response.data[0].msg, role: response.data[0].role });
 
       if (response.data[0].msg === '0') {
+        localStorage.setItem('token',response.data[0].authToken)
         navigateToRole(response.data[0].role);
       } else {
         alert(response.data[0].msg);
